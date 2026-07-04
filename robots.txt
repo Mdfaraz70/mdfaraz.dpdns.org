@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mdfaraz.dpdns.org/sitemap.xml
