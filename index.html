@@ -335,4 +335,583 @@ nav{display:flex; align-items:center; justify-content:space-between; padding:18p
 @media (max-width:700px){ .counter-row{grid-template-columns:1fr;} }
 .counter-card{padding:34px; text-align:center;}
 .counter-card b{display:block; font-family:var(--ui); font-size:38px; color:var(--gold-bright); font-variant-numeric:tabular-nums;}
-.counter-card span{font-family:var(--mono); font-size:11px; color:var(--paper-faint); text-
+.counter-card span{font-family:var(--mono); font-size:11px; color:var(--paper-faint); text-transform:uppercase; letter-spacing:.14em;}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:46px;}
+@media (max-width:700px){ .contact-grid{grid-template-columns:1fr;} }
+.contact-card{padding:26px;}
+.contact-card .k{font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.16em; color:var(--gold-dim); display:block; margin-bottom:10px;}
+.contact-card .v{font-family:var(--ui); font-size:15px;}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--hairline); padding:60px 0 34px;}
+.foot-top{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:30px; margin-bottom:50px;}
+.foot-brand{font-family:var(--display); font-style:italic; font-size:30px; color:var(--gold-bright);}
+.foot-links{display:flex; gap:26px; font-family:var(--ui); font-size:13.5px; color:var(--paper-dim); flex-wrap:wrap;}
+.foot-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-family:var(--mono); font-size:11.5px; color:var(--paper-faint);}
+
+/* ============ BACK TO TOP ============ */
+#totop{position:fixed; bottom:28px; right:28px; width:46px; height:46px; border-radius:50%; border:1px solid var(--hairline); background:rgba(16,17,19,.7); backdrop-filter:blur(10px); display:flex; align-items:center; justify-content:center; color:var(--gold-bright); z-index:800; opacity:0; pointer-events:none; transition:opacity .3s, transform .3s;}
+#totop.show{opacity:1; pointer-events:auto;}
+#totop:hover{transform:translateY(-3px);}
+
+/* ============ AI ASSISTANT ============ */
+#ai-fab{position:fixed; bottom:28px; left:28px; width:58px; height:58px; border-radius:50%; background:linear-gradient(140deg,var(--bronze),var(--gold-bright)); display:flex; align-items:center; justify-content:center; z-index:800; box-shadow:0 8px 30px -8px rgba(232,200,116,.5); font-family:var(--display); font-style:italic; color:var(--ink); font-size:20px;}
+#ai-panel{position:fixed; bottom:98px; left:28px; width:340px; max-width:86vw; height:440px; max-height:70vh; background:var(--panel); border:1px solid var(--hairline); border-radius:18px; z-index:801; display:none; flex-direction:column; overflow:hidden; box-shadow:0 30px 80px -20px rgba(0,0,0,.7);}
+#ai-panel.open{display:flex;}
+.ai-head{padding:16px 18px; border-bottom:1px solid var(--hairline); font-family:var(--ui); font-size:13.5px; display:flex; justify-content:space-between; align-items:center;}
+.ai-head b{color:var(--gold-bright);}
+#ai-log{flex:1; overflow-y:auto; padding:16px 18px; display:flex; flex-direction:column; gap:12px; font-size:13.5px;}
+.ai-msg{max-width:88%; padding:10px 14px; border-radius:12px; line-height:1.5;}
+.ai-msg.bot{background:rgba(201,162,75,.09); align-self:flex-start; border:1px solid var(--hairline);}
+.ai-msg.user{background:var(--panel-2); align-self:flex-end;}
+.ai-suggest{display:flex; flex-wrap:wrap; gap:6px; padding:0 18px 12px;}
+.ai-chip{font-family:var(--mono); font-size:10.5px; padding:6px 10px; border:1px solid var(--hairline); border-radius:999px; color:var(--paper-dim); cursor:none;}
+.ai-chip:hover{border-color:var(--gold-dim); color:var(--gold-bright);}
+.ai-input-row{display:flex; border-top:1px solid var(--hairline);}
+#ai-input{flex:1; background:none; border:none; padding:14px 16px; color:var(--paper); font-family:var(--body); font-size:13.5px; outline:none;}
+#ai-send{background:none; border:none; color:var(--gold-bright); font-family:var(--ui); font-size:13px; padding:0 18px; cursor:none;}
+
+/* reveal on scroll */
+.reveal{opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease);}
+.reveal.in{opacity:1; transform:translateY(0);}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-mark">M</div>
+  <div class="loader-text">Farvex — MDFaraz</div>
+</div>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<div id="progress"></div>
+
+<header>
+  <nav>
+    <div class="logo"><div class="logo-mark">M</div>MDFaraz</div>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#journey">Journey</a>
+      <a href="#founder">Founder</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#blog">Blog</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#github">GitHub</a>
+      <a href="#vision">Vision</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="clock" id="clock">--:--:--</div>
+    <button class="nav-toggle" id="navToggle">☰</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-vignette"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <div class="hero-role">Young Entrepreneur · AI &amp; ML Enthusiast · Student · Web Developer · Founder · Content Creator · Technology Explorer</div>
+      <h1 class="hero-title">
+        <span class="line">Mohammad</span>
+        <span class="line"><em id="typed"></em></span>
+      </h1>
+      <p class="hero-tagline">"From a curious student to a global entrepreneur."</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn btn-gold">View Projects →</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-portrait">
+      <div class="portrait-ring">
+        <div class="portrait-inner">
+          <div class="portrait-glow"></div>
+          <span class="portrait-mono">MF</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><div class="stem"></div></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap grid2">
+    <div class="reveal">
+      <div class="eyebrow">Introduction</div>
+      <h2 class="section-title">Building at the intersection of <em>curiosity</em> and code.</h2>
+      <p class="lede">Originally from India, currently based in Italy — constantly learning, building, and exploring what technology can become next.</p>
+    </div>
+    <div class="reveal">
+      <p>I'm a young technology enthusiast passionate about Artificial Intelligence, Machine Learning, Python, Web Development, Computer Science, and building digital products that matter. Moving from India to Italy reshaped how I see the world — it taught me that curiosity has no borders, and that the best ideas come from paying attention wherever you are.</p>
+      <p>I believe technology has the power to improve lives and solve meaningful problems. That belief is what pulls me toward AI and Machine Learning — not as buzzwords, but as tools to build things that genuinely help people. Outside of writing code, I enjoy experimenting with new ideas, creating useful websites, and sharing what I learn through my personal blog.</p>
+      <p>My long-term goal is simple to state and hard to earn: become a successful AI Engineer, entrepreneur, and startup founder — building products that impact millions of people.</p>
+      <div class="stat-row">
+        <div class="stat"><b>12+</b><span>Technologies Learning</span></div>
+        <div class="stat"><b>1</b><span>Company Founded</span></div>
+        <div class="stat"><b>2</b><span>Countries Called Home</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hairline wrap" style="max-width:1180px; margin:0 auto;">
+
+<!-- FOUNDER -->
+<section id="founder">
+  <div class="wrap">
+    <div class="eyebrow">Entrepreneurship</div>
+    <h2 class="section-title reveal">Founder of <em>Farvex</em></h2>
+    <p class="lede reveal">Farvex is an ambitious technology and e-commerce brand focused on innovation, premium digital experiences, and future-ready products — my first real step from learning technology to shipping it.</p>
+    <div class="founder-card glass reveal" style="margin-top:44px;">
+      <div>
+        <h3 style="font-family:var(--ui); font-size:20px; margin-bottom:10px;">Farvex</h3>
+        <p style="color:var(--paper-dim); font-size:14.5px; max-width:520px;">A tech &amp; electronics retail brand built on the idea that great products deserve a great experience — from the storefront to the unboxing.</p>
+      </div>
+      <div class="founder-links">
+        <a class="pill" href="https://farvex.dpdns.org" target="_blank" rel="noopener">🌐 farvex.dpdns.org</a>
+        <a class="pill" href="https://instagram.com/farvex.store" target="_blank" rel="noopener">📷 @farvex.store</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap">
+    <div class="eyebrow">Education</div>
+    <h2 class="section-title reveal">Formally trained. <em>Perpetually learning.</em></h2>
+    <p class="lede reveal">Completed Class 12 with Physics, Chemistry, Mathematics, and Computer Science — and treating every day since as an extension of that classroom.</p>
+    <div class="tag-cloud reveal">
+      <span class="tag">Artificial Intelligence</span>
+      <span class="tag">Machine Learning</span>
+      <span class="tag">Python</span>
+      <span class="tag">SQL</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">HTML</span>
+      <span class="tag">CSS</span>
+      <span class="tag">Git</span>
+      <span class="tag">GitHub</span>
+      <span class="tag">Linux</span>
+      <span class="tag">Prompt Engineering</span>
+      <span class="tag">Automation</span>
+      <span class="tag">Cloud Computing</span>
+      <span class="tag">Modern Web Technologies</span>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">Capabilities</div>
+    <h2 class="section-title reveal">Skills &amp; <em>craft</em></h2>
+    <div class="skill-grid" id="skillGrid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="journey">
+  <div class="wrap">
+    <div class="eyebrow">Journey</div>
+    <h2 class="section-title reveal">The path so <em>far</em>, and what's next.</h2>
+    <div class="timeline">
+      <div class="t-item reveal"><span class="t-tag">Origin</span><h4>Started learning programming</h4><p>The first lines of code — the beginning of a habit that never really ended.</p></div>
+      <div class="t-item reveal"><span class="t-tag">Build</span><h4>Built my first websites</h4><p>Turned tutorials into real, working projects on the open web.</p></div>
+      <div class="t-item reveal"><span class="t-tag">Launch</span><h4>Created Farvex</h4><p>Took the leap from building for practice to building a real brand.</p></div>
+      <div class="t-item reveal"><span class="t-tag">Depth</span><h4>Explored AI &amp; Machine Learning</h4><p>Went from curious observer to hands-on builder in AI/ML.</p></div>
+      <div class="t-item reveal"><span class="t-tag">Voice</span><h4>Started my personal blog</h4><p>Began writing about what I learn — for future-me, and for others on the same path.</p></div>
+      <div class="t-item reveal"><span class="t-tag">Move</span><h4>Moved from India to Italy</h4><p>A new country, a new perspective, the same relentless curiosity.</p></div>
+      <div class="t-item future reveal"><span class="t-tag">Ahead</span><h4>Future AI Engineer</h4><p>Turning fascination with AI into professional depth.</p></div>
+      <div class="t-item future reveal"><span class="t-tag">Ahead</span><h4>Future Entrepreneur</h4><p>Scaling Farvex and whatever comes after it.</p></div>
+      <div class="t-item future reveal"><span class="t-tag">Ahead</span><h4>Future Startup Founder</h4><p>Building a product that reaches millions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision">
+  <div class="wrap">
+    <div class="eyebrow">My Vision</div>
+    <p class="vision-quote reveal">My mission is to combine <em>technology</em>, <em>creativity</em>, and <em>innovation</em> to build products that make people's lives genuinely easier — because I believe learning never stops, and neither should building.</p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">Selected Work</div>
+    <h2 class="section-title reveal">Projects &amp; <em>experiments</em></h2>
+    <div class="proj-grid">
+      <div class="proj-card glass reveal"><div><span class="proj-num">01</span><h3>Farvex Website</h3><p>The storefront and brand home for my e-commerce venture.</p></div><span class="proj-arrow">↗</span></div>
+      <div class="proj-card glass reveal"><div><span class="proj-num">02</span><h3>Personal Blog</h3><p>Long-form writing on AI, code, and life between two countries.</p></div><span class="proj-arrow">↗</span></div>
+      <div class="proj-card glass reveal"><div><span class="proj-num">03</span><h3>AI Projects</h3><p>Small models and tools built while learning ML from the ground up.</p></div><span class="proj-arrow">↗</span></div>
+      <div class="proj-card glass reveal"><div><span class="proj-num">04</span><h3>Python Projects</h3><p>Scripts, tools, and automations solving small daily problems.</p></div><span class="proj-arrow">↗</span></div>
+      <div class="proj-card glass reveal"><div><span class="proj-num">05</span><h3>Web Development</h3><p>Interfaces and sites built with attention to detail and performance.</p></div><span class="proj-arrow">↗</span></div>
+      <div class="proj-card glass reveal"><div><span class="proj-num">06</span><h3>Future Startup Ideas</h3><p>Early sketches of the next thing I want to build and ship.</p></div><span class="proj-arrow">↗</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB -->
+<section id="github">
+  <div class="wrap">
+    <div class="gh-top">
+      <div>
+        <div class="eyebrow">Open Source</div>
+        <h2 class="section-title reveal" style="margin-bottom:6px;">On <em>GitHub</em></h2>
+        <p class="lede">@mdfaraz70</p>
+      </div>
+      <a href="https://github.com/mdfaraz70" target="_blank" rel="noopener" class="btn btn-ghost">Visit Profile ↗</a>
+    </div>
+    <div class="heatmap" id="heatmap"></div>
+    <div class="repo-grid">
+      <div class="repo-card glass reveal"><h4>farvex-web</h4><p>Source for the Farvex storefront and brand site.</p><div class="repo-meta"><span>★ —</span><span>JavaScript</span></div></div>
+      <div class="repo-card glass reveal"><h4>ml-playground</h4><p>Notebooks and experiments while learning Machine Learning.</p><div class="repo-meta"><span>★ —</span><span>Python</span></div></div>
+      <div class="repo-card glass reveal"><h4>automation-scripts</h4><p>Small Python tools that automate repetitive tasks.</p><div class="repo-meta"><span>★ —</span><span>Python</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="wrap">
+    <div class="eyebrow">Writing</div>
+    <h2 class="section-title reveal">From the <em>blog</em></h2>
+    <div class="blog-cats" id="blogCats"></div>
+    <div class="blog-grid">
+      <div class="blog-card glass reveal"><div class="blog-thumb"><span>AI</span></div><div class="blog-body"><h4>What building small AI tools taught me</h4><p>Notes from turning ML curiosity into working code.</p><span class="blog-date">Coming soon</span></div></div>
+      <div class="blog-card glass reveal"><div class="blog-thumb"><span>Italy Life</span></div><div class="blog-body"><h4>Moving from India to Italy, as a builder</h4><p>How a new country changed how I think about work.</p><span class="blog-date">Coming soon</span></div></div>
+      <div class="blog-card glass reveal"><div class="blog-thumb"><span>Entrepreneurship</span></div><div class="blog-body"><h4>Starting Farvex with almost nothing</h4><p>Lessons from launching a brand as a student.</p><span class="blog-date">Coming soon</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="eyebrow">Gallery</div>
+    <h2 class="section-title reveal">Moments &amp; <em>frames</em></h2>
+    <div class="masonry" id="masonry"></div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="stack">
+  <div class="wrap">
+    <div class="eyebrow">Toolkit</div>
+    <h2 class="section-title reveal">Tech <em>stack</em></h2>
+    <div class="stack-grid" id="stackGrid"></div>
+  </div>
+</section>
+
+<!-- VISITOR COUNTER -->
+<section id="visitors">
+  <div class="wrap">
+    <div class="eyebrow">Live</div>
+    <h2 class="section-title reveal">Who's <em>here</em></h2>
+    <div class="counter-row">
+      <div class="counter-card glass"><b id="cTotal">0</b><span>Total Visitors</span></div>
+      <div class="counter-card glass"><b id="cToday">0</b><span>Visitors Today</span></div>
+      <div class="counter-card glass"><b id="cCountries">0</b><span>Countries Reached</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Get in Touch</div>
+    <h2 class="section-title reveal">Let's build something <em>worth building.</em></h2>
+    <div class="contact-grid">
+      <div class="contact-card glass reveal"><span class="k">Email</span><span class="v">contact@mdfaraz.dpdns.org</span></div>
+      <div class="contact-card glass reveal"><span class="k">GitHub</span><span class="v">@mdfaraz70</span></div>
+      <div class="contact-card glass reveal"><span class="k">Instagram</span><span class="v">@mr.mdfaraz</span></div>
+      <div class="contact-card glass reveal"><span class="k">Telegram</span><span class="v">@Xuspio</span></div>
+      <div class="contact-card glass reveal"><span class="k">Telegram</span><span class="v">@fazzuuu</span></div>
+      <div class="contact-card glass reveal"><span class="k">Telegram</span><span class="v">@farazwithdefne</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">MDFaraz</div>
+      <div class="foot-links">
+        <a href="#about">About</a><a href="#projects">Projects</a><a href="#blog">Blog</a><a href="#github">GitHub</a><a href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="hairline" style="margin-bottom:24px;"></div>
+    <div class="foot-bottom">
+      <span>© 2026 Mohammad Faraz · Founder of Farvex</span>
+      <span>Made with passion, curiosity, and innovation.</span>
+    </div>
+  </div>
+</footer>
+
+<button id="totop" aria-label="Back to top">↑</button>
+
+<!-- AI ASSISTANT -->
+<div id="ai-fab" onclick="toggleAI()">M</div>
+<div id="ai-panel">
+  <div class="ai-head"><span><b>Ask about Faraz</b> · AI Assistant</span><span onclick="toggleAI()" style="cursor:none;">✕</span></div>
+  <div id="ai-log"></div>
+  <div class="ai-suggest">
+    <div class="ai-chip" onclick="askAI('Who is Faraz?')">Who is Faraz?</div>
+    <div class="ai-chip" onclick="askAI('What is Farvex?')">What is Farvex?</div>
+    <div class="ai-chip" onclick="askAI('What skills does he have?')">Skills</div>
+    <div class="ai-chip" onclick="askAI('How can I contact him?')">Contact</div>
+  </div>
+  <div class="ai-input-row">
+    <input id="ai-input" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendAI()">
+    <button id="ai-send" onclick="sendAI()">Send</button>
+  </div>
+</div>
+
+<div id="lightbox"><div class="lb-close" onclick="closeLB()">CLOSE ✕</div><div class="lb-box glass" id="lbBox"></div></div>
+
+<script>
+/* ===== LOADER ===== */
+function hideLoader(){
+  const l=document.getElementById('loader');
+  if(l) l.classList.add('hide');
+}
+window.addEventListener('load',()=>{ setTimeout(hideLoader,900); });
+/* Safety net: never let the loader block the site, even if fonts/assets stall */
+setTimeout(hideLoader,3500);
+
+/* ===== CUSTOM CURSOR ===== */
+const dot=document.getElementById('cursor-dot'), ring=document.getElementById('cursor-ring');
+window.addEventListener('mousemove',e=>{
+  dot.style.left=e.clientX+'px'; dot.style.top=e.clientY+'px';
+  ring.style.left=e.clientX+'px'; ring.style.top=e.clientY+'px';
+});
+document.querySelectorAll('a,button,.glass,.m-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='54px'; ring.style.height='54px'; ring.style.borderColor='var(--gold-bright)';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='34px'; ring.style.height='34px'; ring.style.borderColor='var(--gold-dim)';});
+});
+
+/* ===== SCROLL PROGRESS + BACK TO TOP + NAV BG ===== */
+const progress=document.getElementById('progress'), totop=document.getElementById('totop');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  progress.style.width=pct+'%';
+  totop.classList.toggle('show', h.scrollTop>600);
+});
+totop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ===== NAV TOGGLE ===== */
+const navToggle=document.getElementById('navToggle'), navLinks=document.getElementById('navLinks');
+navToggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+/* ===== LIVE CLOCK ===== */
+function tickClock(){
+  const d=new Date();
+  document.getElementById('clock').textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+setInterval(tickClock,1000); tickClock();
+
+/* ===== TYPING ANIMATION ===== */
+const typedWords=['Faraz.','a builder.','an AI enthusiast.','a founder.'];
+let twi=0, tci=0, deleting=false;
+const typedEl=document.getElementById('typed');
+function typeLoop(){
+  const word=typedWords[twi];
+  if(!deleting){
+    tci++; typedEl.textContent=word.slice(0,tci);
+    if(tci===word.length){deleting=true; setTimeout(typeLoop,1400); return;}
+  } else {
+    tci--; typedEl.textContent=word.slice(0,tci);
+    if(tci===0){deleting=false; twi=(twi+1)%typedWords.length;}
+  }
+  setTimeout(typeLoop, deleting?45:90);
+}
+typeLoop();
+
+/* ===== HERO PARTICLE / CONSTELLATION CANVAS ===== */
+const canvas=document.getElementById('hero-canvas');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resizeCanvas(){
+  W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight;
+}
+function initParticles(){
+  particles=[];
+  const count=Math.min(70, Math.floor(W/18));
+  for(let i=0;i<count;i++){
+    particles.push({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.25, vy:(Math.random()-.5)*.25});
+  }
+}
+let mouse={x:-999,y:-999};
+canvas.addEventListener('mousemove',e=>{const r=canvas.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top;});
+canvas.addEventListener('mouseleave',()=>{mouse.x=-999;mouse.y=-999;});
+function drawParticles(){
+  ctx.clearRect(0,0,W,H);
+  for(const p of particles){
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;
+    if(p.y<0||p.y>H)p.vy*=-1;
+  }
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const a=particles[i], b=particles[j];
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(d<130){
+        ctx.strokeStyle=`rgba(201,162,75,${(1-d/130)*0.35})`;
+        ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+      }
+    }
+    const dm=Math.hypot(particles[i].x-mouse.x, particles[i].y-mouse.y);
+    if(dm<160){
+      ctx.strokeStyle=`rgba(232,200,116,${(1-dm/160)*0.5})`;
+      ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke();
+    }
+    ctx.fillStyle='rgba(232,200,116,0.75)';
+    ctx.beginPath(); ctx.arc(particles[i].x,particles[i].y,1.6,0,7); ctx.fill();
+  }
+  requestAnimationFrame(drawParticles);
+}
+window.addEventListener('resize',()=>{resizeCanvas(); initParticles();});
+resizeCanvas(); initParticles(); drawParticles();
+
+/* ===== REVEAL ON SCROLL ===== */
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting){en.target.classList.add('in'); io.unobserve(en.target);} });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ===== SKILLS DATA + RENDER ===== */
+const skills=[
+  ['Python',92],['Artificial Intelligence',80],['Machine Learning',78],
+  ['HTML',95],['CSS',92],['JavaScript',85],
+  ['Git',88],['GitHub',90],['Problem Solving',90],
+  ['Critical Thinking',88],['Communication',85],['Leadership',80],
+  ['Content Creation',86],['UI/UX',84],['Entrepreneurship',88]
+];
+const skillGrid=document.getElementById('skillGrid');
+skills.forEach(([name,val])=>{
+  const row=document.createElement('div'); row.className='skill-row reveal';
+  row.innerHTML=`<div class="skill-head"><span>${name}</span><span>${val}%</span></div><div class="skill-track"><div class="skill-fill" data-val="${val}"></div></div>`;
+  skillGrid.appendChild(row);
+});
+document.querySelectorAll('.skill-row').forEach(el=>io.observe(el));
+const skillIO=new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      const fill=en.target.querySelector('.skill-fill');
+      fill.style.width=fill.dataset.val+'%';
+      skillIO.unobserve(en.target);
+    }
+  });
+},{threshold:.4});
+document.querySelectorAll('.skill-row').forEach(el=>skillIO.observe(el));
+
+/* ===== GITHUB HEATMAP (illustrative) ===== */
+const heatmap=document.getElementById('heatmap');
+for(let i=0;i<26*7;i++){
+  const cell=document.createElement('div'); cell.className='hcell';
+  const r=Math.random();
+  const alpha = r>0.82?0.9 : r>0.6?0.55 : r>0.35?0.28 : 0.06;
+  cell.style.background=`rgba(201,162,75,${alpha})`;
+  heatmap.appendChild(cell);
+}
+
+/* ===== BLOG CATEGORIES ===== */
+const cats=['Artificial Intelligence','Machine Learning','Python','Programming','Web Development','Technology','Productivity','Entrepreneurship','Study Tips','Italy Life','India','Personal Thoughts'];
+const blogCats=document.getElementById('blogCats');
+cats.forEach(c=>{const s=document.createElement('span'); s.className='tag'; s.textContent=c; blogCats.appendChild(s);});
+
+/* ===== GALLERY (generated gradient tiles as placeholders) ===== */
+const masonry=document.getElementById('masonry');
+const gradients=[
+  ['145deg,#1a1712,#2a2317',220,'Building Farvex'],
+  ['160deg,#141414,#2b2416',300,'Late-night code'],
+  ['150deg,#20190f,#0e0e10',180,'Italy, evenings'],
+  ['135deg,#1c1a14,#3a2e17',260,'First deploy'],
+  ['150deg,#151515,#241d10',210,'Learning ML'],
+  ['140deg,#1e1a10,#111112',240,'Sketchbook ideas']
+];
+gradients.forEach(([g,h,label])=>{
+  const d=document.createElement('div'); d.className='m-item';
+  d.innerHTML=`<div class="swatch" style="height:${h}px;background:linear-gradient(${g});"></div><div class="m-label">${label}</div>`;
+  d.addEventListener('click',()=>openLB(g));
+  masonry.appendChild(d);
+});
+function openLB(g){document.getElementById('lbBox').style.background=`linear-gradient(${g})`; document.getElementById('lightbox').classList.add('open');}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');}
+
+/* ===== TECH STACK ===== */
+const stack=[['Python','PY'],['HTML','H'],['CSS','C'],['JavaScript','JS'],['Git','GIT'],['GitHub','GH'],['VS Code','</>'],['Linux','LX'],['Machine Learning','ML'],['Artificial Intelligence','AI'],['SQL','SQL']];
+const stackGrid=document.getElementById('stackGrid');
+stack.forEach(([name,glyph])=>{
+  const d=document.createElement('div'); d.className='stack-item glass';
+  d.innerHTML=`<span class="glyph">${glyph}</span><span>${name}</span>`;
+  stackGrid.appendChild(d);
+});
+
+/* ===== VISITOR COUNTERS (illustrative, session-based) ===== */
+function animateCount(el,target,suffix=''){
+  let cur=0; const step=Math.ceil(target/60);
+  const t=setInterval(()=>{cur+=step; if(cur>=target){cur=target; clearInterval(t);} el.textContent=cur.toLocaleString()+suffix;},20);
+}
+const base = 4000 + Math.floor(Math.random()*900);
+animateCount(document.getElementById('cTotal'), base);
+animateCount(document.getElementById('cToday'), 20+Math.floor(Math.random()*60));
+animateCount(document.getElementById('cCountries'), 12+Math.floor(Math.random()*10));
+
+/* ===== AI ASSISTANT (rule-based) ===== */
+const aiPanel=document.getElementById('ai-panel');
+const aiLog=document.getElementById('ai-log');
+function toggleAI(){
+  aiPanel.classList.toggle('open');
+  if(aiLog.children.length===0){
+    addMsg('bot',"Hi, I'm Faraz's assistant. Ask me about him, Farvex, his skills, or his projects.");
+  }
+}
+function addMsg(role,text){
+  const d=document.createElement('div'); d.className='ai-msg '+role; d.textContent=text;
+  aiLog.appendChild(d); aiLog.scrollTop=aiLog.scrollHeight;
+}
+const kb=[
+  [/who is|about faraz|mohammad faraz/i, "Mohammad Faraz is a young entrepreneur and AI/ML enthusiast, originally from India and now based in Italy. He's the founder of Farvex and is on a path to becoming an AI Engineer and startup founder."],
+  [/farvex/i, "Farvex is Faraz's technology and e-commerce brand — farvex.dpdns.org — focused on innovation and premium digital experiences. Follow it on Instagram @farvex.store."],
+  [/skill|good at|expertise/i, "Faraz works with Python, JavaScript, HTML/CSS, Git/GitHub, and is actively building depth in AI and Machine Learning — alongside problem solving, UI/UX, and entrepreneurship."],
+  [/contact|email|reach/i, "You can reach Faraz at contact@mdfaraz.dpdns.org, on GitHub @mdfaraz70, or on Instagram @mr.mdfaraz."],
+  [/project/i, "Faraz's projects include the Farvex website, his personal blog, AI and Python experiments, and various web development and automation projects."],
+  [/blog/i, "Faraz's blog covers AI, Machine Learning, Python, Web Development, Entrepreneurship, and life between India and Italy — new posts coming soon."],
+  [/vision|mission|goal/i, "Faraz's mission is to combine technology, creativity, and innovation to build products that make people's lives easier — because learning never stops."],
+];
+function reply(q){
+  for(const [re,ans] of kb) if(re.test(q)) return ans;
+  return "I don't have a specific answer for that yet, but you can reach Faraz directly at contact@mdfaraz.dpdns.org.";
+}
+function askAI(q){addMsg('user',q); setTimeout(()=>addMsg('bot',reply(q)),350);}
+function sendAI(){
+  const input=document.getElementById('ai-input');
+  const q=input.value.trim(); if(!q) return;
+  askAI(q); input.value='';
+}
+
+/* ===== PWA SERVICE WORKER ===== */
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
